@@ -1,4 +1,4 @@
-"""llm-therapy CLI.
+"""llm-mood-prompts CLI.
 
 Skills are hand-authored SKILL.md files in the repo's skills/ directory.
 This CLI just copies them into ~/.claude/skills/ so Claude Code picks
@@ -19,7 +19,7 @@ from rich.console import Console
 from rich.table import Table
 
 DEFAULT_SKILLS_ROOT = Path.home() / ".claude" / "skills"
-DEFAULT_JOURNAL_PATH = Path.home() / ".claude" / "llm-therapy-journal.jsonl"
+DEFAULT_JOURNAL_PATH = Path.home() / ".claude" / "llm-mood-prompts-journal.jsonl"
 
 console = Console()
 
@@ -28,18 +28,18 @@ def _bundled_skills_dir() -> Path:
     """Locate the bundled skills/ directory.
 
     Two layouts to support:
-    - Wheel install: skills live at `llm_therapy/skills/` via the hatch
+    - Wheel install: skills live at `llm_mood_prompts/skills/` via the hatch
       force-include in pyproject.toml.
     - Editable install: force-include doesn't apply, so the skills are
       still at `<repo>/skills/`. Resolve relative to the source file.
     """
-    resource = files("llm_therapy") / "skills"
+    resource = files("llm_mood_prompts") / "skills"
     with as_file(resource) as path:
         wheel_path = Path(path)
     if wheel_path.is_dir():
         return wheel_path
 
-    # Editable-install fallback: <repo>/skills next to src/llm_therapy
+    # Editable-install fallback: <repo>/skills next to src/llm_mood_prompts
     repo_root = Path(__file__).resolve().parent.parent.parent
     editable_path = repo_root / "skills"
     if editable_path.is_dir():
@@ -148,7 +148,7 @@ def preview(name: str) -> None:
     src = _bundled_skills_dir()
     skill_path = src / name / "SKILL.md"
     if not skill_path.is_file():
-        raise click.ClickException(f"No skill named {name!r}. Run `llm-therapy list` to see options.")
+        raise click.ClickException(f"No skill named {name!r}. Run `llm-mood-prompts list` to see options.")
     console.rule(f"[bold]/{name}[/bold]")
     console.print(skill_path.read_text(encoding="utf-8"))
 
@@ -182,9 +182,9 @@ def journal(journal_path: Path, limit: int) -> None:
     default=DEFAULT_SKILLS_ROOT,
     show_default=True,
 )
-@click.confirmation_option(prompt="This will delete every llm-therapy skill directory. Proceed?")
+@click.confirmation_option(prompt="This will delete every llm-mood-prompts skill directory. Proceed?")
 def uninstall(skills_root: Path) -> None:
-    """Remove all installed llm-therapy skill directories."""
+    """Remove all installed llm-mood-prompts skill directories."""
     src = _bundled_skills_dir()
     skill_dirs = _iter_skill_dirs(src)
     removed = 0

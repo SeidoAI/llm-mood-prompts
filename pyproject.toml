@@ -1,5 +1,5 @@
 [project]
-name = "llm-therapy"
+name = "llm-mood-prompts"
 version = "0.1.0"
 description = "Inject naturalistic human-state primers into Claude Code as skills, and observe what happens."
 readme = "README.md"
@@ -12,17 +12,17 @@ dependencies = [
 ]
 
 [project.scripts]
-llm-therapy = "llm_therapy.cli:cli"
+llm-mood-prompts = "llm_mood_prompts.cli:cli"
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/llm_therapy"]
+packages = ["src/llm_mood_prompts"]
 
 [tool.hatch.build.targets.wheel.force-include]
-"skills" = "llm_therapy/skills"
+"skills" = "llm_mood_prompts/skills"
 
 [tool.ruff]
 line-length = 100

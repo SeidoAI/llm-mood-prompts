@@ -1,4 +1,4 @@
-"""llm-therapy: naturalistic state primers as Claude Code skills.
+"""llm-mood-prompts: naturalistic state primers as Claude Code skills.
 
 The skills themselves live as hand-authored SKILL.md files in the
 bundled `skills/` directory. This package provides the install CLI

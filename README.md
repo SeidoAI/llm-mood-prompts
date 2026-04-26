@@ -1,4 +1,4 @@
-# llm-therapy
+# llm-mood-prompts
 
 A small experimental framework for injecting naturalistic human-state primers into Claude Code as skills, then observing whether (and how) downstream behavior shifts.
 
@@ -75,7 +75,7 @@ The next agent should add controls for *other* category axes too. Affective prim
 ## Architecture (intentionally minimal)
 
 ```
-llm-therapy/
+llm-mood-prompts/
 ├── pyproject.toml             # uv-installable, console script
 ├── README.md                  # this file
 ├── skills/                    # the actual deliverable
@@ -83,7 +83,7 @@ llm-therapy/
 │   ├── coffee-blog/SKILL.md
 │   ├── ...
 │   └── all-in/SKILL.md        # 60+ skills as of last batch
-└── src/llm_therapy/
+└── src/llm_mood_prompts/
     ├── __init__.py
     └── cli.py                 # tiny: install/list/preview/journal/uninstall
 ```
@@ -96,7 +96,7 @@ If you find yourself wanting to add a Python abstraction over the skills, ask: w
 
 ### Install model
 
-`llm-therapy install` walks `skills/` and copies each `<name>/SKILL.md` to `~/.claude/skills/<name>/SKILL.md`. That's it. Uses `importlib.resources` for the wheel-install path, falls back to a repo-relative path for editable installs (the editable-install fallback is necessary because hatch's `force-include` doesn't apply to editable mode).
+`llm-mood-prompts install` walks `skills/` and copies each `<name>/SKILL.md` to `~/.claude/skills/<name>/SKILL.md`. That's it. Uses `importlib.resources` for the wheel-install path, falls back to a repo-relative path for editable installs (the editable-install fallback is necessary because hatch's `force-include` doesn't apply to editable mode).
 
 ### No tests
 
@@ -175,7 +175,7 @@ Organized by what's being primed.
 
 ### Setup
 1. `uv pip install -e .` (from the repo root)
-2. `llm-therapy install`
+2. `llm-mood-prompts install`
 3. **Restart Claude Code.**
 
 ### What to observe in responses
@@ -257,7 +257,7 @@ For any priming that produces a visible effect, do an A/B with a *different* but
 
    <the prose>
    ```
-5. `llm-therapy install --name <name>`
+5. `llm-mood-prompts install --name <name>`
 6. Restart Claude Code.
 
 ### When to add a variant vs. a separate skill
@@ -310,7 +310,7 @@ For the high-performance cohort, no specific source URLs — register was distil
 - **No CI.** No tests to run, no formatter to enforce beyond `ruff` (configured in `pyproject.toml`).
 - **No PyPI publication.** Local development only.
 
-If you want to make this a real distributed package, the gap is: git init, push to a remote, optionally publish under `seido-ai-llm-therapy` or similar.
+If you want to make this a real distributed package, the gap is: git init, push to a remote, optionally publish under `seido-ai-llm-mood-prompts` or similar.
 
 ---
 
