@@ -174,9 +174,32 @@ Organized by what's being primed.
 ## Running experiments
 
 ### Setup
-1. `uv pip install -e .` (from the repo root)
-2. `llm-mood-prompts install`
-3. **Restart Claude Code.**
+
+Three install paths, depending on whether you're developing or just running:
+
+**Local dev (editable):**
+```bash
+git clone git@github.com:SeidoAI/llm-mood-prompts.git
+cd llm-mood-prompts
+uv pip install -e .
+llm-mood-prompts install
+```
+
+**Other machines (no clone needed):**
+```bash
+uv tool install --from git+https://github.com/SeidoAI/llm-mood-prompts.git llm-mood-prompts
+llm-mood-prompts install
+```
+
+**(Future)** if/when published to PyPI:
+```bash
+pip install llm-mood-prompts
+llm-mood-prompts install
+```
+
+After install: **restart Claude Code.** Skills are discovered at session start, so any active session will not see them until restart. Once restarted, the skills are available in *every* Claude Code session for your user — `~/.claude/skills/` is global per-user, not per-project.
+
+To distribute to other people: the GitHub install path above works today with no extra setup. PyPI publication would lower the friction further (one less URL to remember) but isn't required.
 
 ### What to observe in responses
 
